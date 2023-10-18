@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
     mobile : {
         type: String,
         required : [ true , " Please enter your mobile "],
+        minlength: 10
   
     },age : {
         type: String,
