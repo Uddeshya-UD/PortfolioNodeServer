@@ -4,7 +4,14 @@ const routes = require('./routes/authRoutes')
 const app = express();
 const port = 3000;
 
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            //access-control-allow-credentials:true
+   optionSuccessStatus:200,
+}
 
+app.use(cors(corsOptions))
 // middleware
 app.use(express.static('public'));
 app.use(express.json())

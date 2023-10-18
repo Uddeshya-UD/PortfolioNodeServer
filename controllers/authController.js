@@ -43,13 +43,19 @@ const signin_get = (req, res, next) => {
 }
 
 const signin_post = (req, res, next) => {
-  const { email, password } = req.body;
+  const { firstname , secondname, mobile, age, gender, email, password } = req.body;
 
   let user = new User({
+    firstname: firstname,
+    secondname: secondname,
+    mobile: mobile,
+    age: age,
+    gender: gender,
     email: email,
     password: password
   });
 
+  console.log("User : "+user)
   user.save()
     .then((result) => {
         const token = createToken(result._id);
