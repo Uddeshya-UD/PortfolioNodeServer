@@ -3,15 +3,16 @@ const mongoose = require('mongoose');
 const routes = require('./routes/authRoutes')
 const app = express();
 const port = 3000;
+const cookieParser = require('cookie-parser')
+const cors = require('cors');
 
-const cors=require("cors");
-const corsOptions ={
-   origin:'*', 
-   credentials:true,            //access-control-allow-credentials:true
-   optionSuccessStatus:200,
-}
 
-app.use(cors(corsOptions))
+app.use(cookieParser());
+
+app.use(cors({
+  origin: 'http://localhost:3006', // Replace with the actual origin of your React app
+  credentials: true, // Allow credentials (cookies)
+}));
 // middleware
 app.use(express.static('public'));
 app.use(express.json())
