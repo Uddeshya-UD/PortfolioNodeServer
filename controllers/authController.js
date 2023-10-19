@@ -6,6 +6,15 @@ const handleErrors = (err) => {
   console.log(err.message, err.code);
   let errors = { email: "", password: "" };
 
+  // incorrect email 
+  if(err.message === `Incorrect email`){
+    errors.email = `The email is not registered`
+  }
+
+  // incorrect password 
+  if(err.message === `Incorrect password`){
+    errors.password = `The password is incorrect`
+  }
   // Duplicate error
   if (err.code === 11000) {
     errors.email = "This email is already registered";
@@ -34,8 +43,20 @@ const login_get = (req, res, next) => {
   res.render("login");
 };
 
-const login_post = (req, res, next) => {
-  res.render("newlogin");
+const login_post = async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.login(email,password)
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+      
+    res.status(200).json({user: user._id});
+  } 
+  
+  catch (err) {
+    const errors = handleErrors(err)
+    res.status(400).json({ errors });
+  }
 };
 
 const signin_get = (req, res, next) => {
@@ -43,15 +64,10 @@ const signin_get = (req, res, next) => {
 };
 
 const signin_post = (req, res, next) => {
-  const { firstname, secondname, mobile, age, gender, email, password } =
+  const {email, password } =
     req.body;
 
   let user = new User({
-    firstname: firstname,
-    secondname: secondname,
-    mobile: mobile,
-    age: age,
-    gender: gender,
     email: email,
     password: password,
   });
