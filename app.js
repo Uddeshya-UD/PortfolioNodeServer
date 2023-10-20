@@ -10,7 +10,12 @@ const cors = require('cors');
 app.use(cookieParser());
 
 app.use(cors({
-  origin: 'http://localhost:3006', // Replace with the actual origin of your React app
+  origin: [
+    'https://uddeshya-ud-reactapp.netlify.app',
+    'http://localhost:3006',
+    'http://52.66.244.135:3000/login',
+    // Add more allowed origins as needed
+  ],
   credentials: true, // Allow credentials (cookies)
 }));
 // middleware
