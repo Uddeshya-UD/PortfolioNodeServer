@@ -13,7 +13,7 @@ app.use(cors({
   origin: [
     'https://uddeshya-ud-reactapp.netlify.app',
     'http://localhost:3006',
-    'http://52.66.244.135:3000/login',
+    'http://52.66.244.135:3000',
     // Add more allowed origins as needed
   ],
   credentials: true, // Allow credentials (cookies)
