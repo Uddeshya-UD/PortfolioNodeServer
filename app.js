@@ -10,8 +10,15 @@ const cors = require('cors');
 app.use(cookieParser());
 
 app.use(cors({
+<<<<<<< HEAD
   origin: 'http://localhost:3006',
   methods: 'GET,POST',
+=======
+  origin: [
+    '*'
+    // Add more allowed origins as needed
+  ],
+>>>>>>> 9a6aa5901d9b4d587481a3e587b64b814a6678bd
   credentials: true, // Allow credentials (cookies)
 }));
 // middleware
