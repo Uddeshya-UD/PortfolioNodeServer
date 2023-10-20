@@ -5,20 +5,15 @@ const app = express();
 const port = 3000;
 const cookieParser = require('cookie-parser')
 const cors = require('cors');
+const http = require('http');
 
+const server = http.createServer(app);
 
 app.use(cookieParser());
 
 app.use(cors({
-<<<<<<< HEAD
   origin: 'http://localhost:3006',
   methods: 'GET,POST',
-=======
-  origin: [
-    '*'
-    // Add more allowed origins as needed
-  ],
->>>>>>> 9a6aa5901d9b4d587481a3e587b64b814a6678bd
   credentials: true, // Allow credentials (cookies)
 }));
 // middleware
@@ -32,7 +27,7 @@ mongoose
 .connect("mongodb+srv://uddeshya:1234@demoapi.xutvhbh.mongodb.net/?retryWrites=true&w=majority")
 .then(() => {
   console.log("Connected to Database")
-  app.listen(port, () => {
+  server.listen(port, () => {
     console.log(`Successfully listening on port ${port}`)
   })
 })
